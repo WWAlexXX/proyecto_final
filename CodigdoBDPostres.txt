@@ -1,0 +1,74 @@
+﻿create database bdsuggardreams;
+
+use bdsuggardreams;
+
+DROP TABLE IF EXISTS usuarios;
+CREATE TABLE IF NOT EXISTS usuarios (
+  nom varchar(50) NOT NULL,
+  correo varchar(50) NOT NULL,
+  pass varchar(50) NOT NULL,
+  PRIMARY KEY (correo)
+);
+
+INSERT INTO usuarios (nom, correo, pass) VALUES
+('Admin', 'admin@gmail.com', 'admin123'),
+('Juan Antonio', 'juanantonio@gmail.com', 'juanantonio123'),
+('Alexander', 'alexander@gmail.com', 'alexander123');
+
+DROP TABLE IF EXISTS postres;
+CREATE TABLE IF NOT EXISTS postres (
+  id int NOT NULL AUTO_INCREMENT,
+  nombre varchar(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO postres (id, nombre) VALUES
+(1, 'Fresas con crema'),
+(2, 'Manzanas con crema'),
+(3, 'Flan'),
+(4, 'Chocoflan'),
+(5, 'Cupcake');
+
+DROP TABLE IF EXISTS bebidas;
+CREATE TABLE IF NOT EXISTS bebidas (
+  id int NOT NULL AUTO_INCREMENT,
+  nombre varchar(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO bebidas (id, nombre) VALUES
+(1, 'Frappe'),
+(2, 'Cafe'),
+(3, 'Jugo de naranja');
+
+DROP TABLE IF EXISTS platillos;
+CREATE TABLE IF NOT EXISTS platillos (
+  id int NOT NULL AUTO_INCREMENT,
+  nombre varchar(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO platillos (id, nombre) VALUES
+(1, 'Sandwich'),
+(2, 'Ensalada'),
+(3, 'Omellete');
+
+DROP TABLE IF EXISTS pedidos;
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  id int NOT NULL AUTO_INCREMENT,
+  nombre varchar(50) DEFAULT NULL,
+  direccion varchar(255) DEFAULT NULL,
+  telefono varchar(11) DEFAULT NULL,
+  postres_id int DEFAULT NULL,
+  bebidas_id int DEFAULT NULL,
+  platillos_id int DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY postres_id (postres_id),
+  KEY bebidas_id (bebidas_id),
+  KEY platillos_id (platillos_id)
+);
+
+INSERT INTO pedidos (id, nombre, direccion, telefono, postres_id, bebidas_id, platillos_id) VALUES
+(1, 'Juan Antonio Garcia Morante', 'Calle Norte #21 San Francisco', 2481730923, 1, 3, 2),
+(2, 'Alexander Lozada Salgado', 'Calle Sur #35 Tlaxcala', 2451830283, 1, 2, 3),
+(3, 'Samuel Mares Barragan', 'Calle Poniente #15 San Jeronimo', 2481940238, 1, 2, 2);
